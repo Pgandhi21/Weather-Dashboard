@@ -1,18 +1,113 @@
+/* Body style */
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-    line-height: 1;
+    margin: 0px 15px;
+    max-height: 100vh;
+    max-width: 100vw;
   }
 
+/* Jumbotron/heading Style */
 .jumbotron {
   text-align: center;
   background: rgb(0,212,255);
   background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 39%, rgba(2,0,36,1) 100%);
   color: white;
   font-weight: thicker;
-  padding: 1%; 
+  padding: 0.5%; 
 }
 
 .jumbotron h1 {
-    padding-top: 1%; 
-  }
+  padding-top: 0.5%; 
+}
+
+/* Overall Main Container Style */
+.cardContainer {
+width: 100%;
+height: 100%;
+margin-right: 5px;
+margin-left: 5px;
+padding: 0.5%;
+}
+
+/* Sidebar Style */
+.sidebarCol {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.cityForm {
+  display: inline-block;
+  vertical-align: top;
+  /* overflow: auto; */
+  width: 100%;
+  border-bottom: 5px solid grey;
+  padding: 0px;
+}
+
+.cityForm label{
+  font-size: 2rem;
+  font:bolder;
+  padding-bottom: 5px;
+}
+
+.cityForm input{
+  width: 100%;
+  margin: 5px 0px;
+}
+
+.cityForm button{
+  width: 100%;
+  margin: 5px 0px;
+  font-size: 1.2rem;
+}
+
+.cityList {
+  display: inline-block;
+  vertical-align: top;
+  /* overflow: auto; */
+  padding: 10px 0px;
+  width: 100%;
+}
+
+.cityListBtn {
+  margin: 5px 0px;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+/* Main Content Style */
+.contentCol {
+  display: inline-block;
+  vertical-align: top;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.bigCard {
+  width: 100%;
+  padding: 0px 0px 15px 5px;
+  margin-bottom: 15px;
+  border: black solid 3px;
+}
+
+.card-body {
+  align-items: flex-start;
+  padding: 0px 0px 15px 5px;
+}
+
+.dayTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0px 0px 15px 5px;
+}
+
+.card-group .card {
+  margin:5px;
+  padding: 2px 0px 10px 2px;
+  border: black solid 2px;
+  background-color: rgb(6, 2, 85);
+  color: white;
+}
