@@ -11,36 +11,52 @@ cityWeather("Atlanta");
 $(".cityForm").children("button").click(function(event){
     event.preventDefault();
     var city = $(".cityFormInput").val();
-    cityWeather(city);
-    cityListEl(city); 
+    cityWeather(city); 
+    cityListEl(city);
+    $(".cityFormInput").val("");
+    storeValues(); 
 });
 
-$(".cityList").children("button").click(function(){
-    alert("button clicked");
-    var cityEl = $(this).text();
-    console.log(cityEl);
-    cityWeather(cityEl);    
-});
+// $(".cityList").click(function(){
+//     console.log($(this));
+//     var cityEl = $(this).text();
+//     console.log(cityEl);
+//     cityWeather(cityEl);    
+// });
 
 
 
 function cityListEl(city) {
+    var latLonURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=3e666a3d81484f1bb070cec8466f5dd9";
+
+    fetch(latLonURL)
+        .then(response =>response.json())
+        .then(function(data) {
+            console.log(data);
+            city = data.name;    
+    });
+
     var cityListItemEl = document.createElement("button");
     cityListItemEl.innerText = city;
+    cityListItemEl.classList.add("cityListBtn");
+    cityListItemEl.setAttribute("onClick",`handleClick(event)`);
     console.log(countUl);
     if (countUl >= 8) {
         $("ul button").last().remove();
         $("ul").prepend(cityListItemEl);
-        $(".cityList").children().addClass("cityListBtn");
         console.log(countUl);
+
     } else {
         $("ul").prepend(cityListItemEl);
-        $(".cityList").children().addClass("cityListBtn");
         countUl++;
         console.log(countUl);
     };  
 };
-
+ function handleClick (event){
+     console.log(event);
+     var city = event.target.innerText;
+     cityWeather(city);
+     };
 
 
 function cityWeather(cityInput) {
@@ -80,9 +96,9 @@ $(".card5").children().remove();
 
  console.log(data,cityInput);
 //  Big Card Data  
-$('<h5>' + cityInput + ' ('+ moment.unix(data.daily[0].dt).format("MM/DD/YYYY") +')</h5>').appendTo(".bigCard");
+$('<h5>' + cityInput + ' ('+ moment.unix(data.daily[0].dt).format("MM/DD/YYYY") +') <img src="' + "http://openweathermap.org/img/w/" + data.daily[0].weather[0].icon + ".png" +'"/></h5>').appendTo(".bigCard");
 $(".bigCard").children('h5').addClass("card-title");
-$('<div><img src="' + "http://openweathermap.org/img/w/" + data.daily[0].weather[0].icon + ".png" +'"/></div>').appendTo(".bigCard");
+// $('<div><img src="' + "http://openweathermap.org/img/w/" + data.daily[0].weather[0].icon + ".png" +'"/></div>').appendTo(".bigCard");
 $('<p>Temp: ' + data.daily[0].temp.day +'/' + data.daily[0].temp.night+ ' °F</p>').appendTo(".bigCard");
 $('<p>Wind: ' + data.daily[0].wind_speed +' MPH</p>').appendTo(".bigCard");
 $('<p>Humidity: ' + data.daily[0].humidity +' %</p>').appendTo(".bigCard");
@@ -139,30 +155,32 @@ $(".card5").children('p').addClass("card-text");
 
 
 
-// storeValues(); 
-// function storeValues() {
-//     for (i = 0; i <= countUl; i++) {
-//         var cityKey = i;
-//         var cityKeyValue = $(".cityList").children(i).innerText;
-//         console.log(cityKey);
-//         console.log(cityKeyValue);
-//         localStorage.setItem(cityKey, cityKeyValue);
-//     }
-//     console.log(localStorage.length);
-//     };
+
+function storeValues() {
+    console.log(countUl);
+    for (i = 0; i < countUl; i++) {
+        var cityKey = i;
+        var cityKeyValue = $(".cityList").children()[i].innerText;
+        console.log($(".cityList").children(i));
+        localStorage.setItem(cityKey, cityKeyValue);
+    }
+    console.log(localStorage);
+    console.log(localStorage.length);
+    };
 
 
+function getValues() {
+    for (i = 0; i < localStorage.length; i++) {
+        console.log(localStorage.length);
+        var getList = localStorage.getItem(i);
+        console.log(getList);
+        var newListItems = document.createElement("button");
+        newListItems.innerText = getList;
+        $(".cityList").append(newListItems);
+        $(".cityList").children().addClass("cityListBtn");
+        var city =getList;
+        newListItems.setAttribute("onClick",`handleClick(event)`);
+    }
+};
 
- 
-
-// function getValues() {
-//     for (i = 0; i <= localStorage.length; i++) {
-//         console.log(localStorage.length);
-//         var newListItems = document.createElement("button");
-//         newListItems.innerText = cityKeyValues[i];
-//         $(".cityList").append(newListItems);
-//         $(".cityList").children().addClass("cityListBtn");
-//     }
-// };
-
-// getValues();
+getValues();
