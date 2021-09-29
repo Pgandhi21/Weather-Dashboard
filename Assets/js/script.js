@@ -55,7 +55,7 @@ function handleClick (event){
 
 
 function cityWeather(cityInput) {
-    var latLonURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&appid=3e666a3d81484f1bb070cec8466f5dd9";
+    var latLonURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&appid=3e666a3d81484f1bb070cec8466f5dd9";
     var lat;
     var lon;
     fetch(latLonURL)
