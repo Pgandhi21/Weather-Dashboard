@@ -17,13 +17,6 @@ $(".cityForm").children("button").click(function(event){
     storeValues(); 
 });
 
-// $(".cityList").click(function(){
-//     console.log($(this));
-//     var cityEl = $(this).text();
-//     console.log(cityEl);
-//     cityWeather(cityEl);    
-// });
-
 
 
 function cityListEl(city) {
@@ -52,11 +45,13 @@ function cityListEl(city) {
         console.log(countUl);
     };  
 };
- function handleClick (event){
+
+
+function handleClick (event){
      console.log(event);
      var city = event.target.innerText;
      cityWeather(city);
-     };
+};
 
 
 function cityWeather(cityInput) {
@@ -87,23 +82,40 @@ function cityWeather(cityInput) {
 };
 
 function getWeather(data, cityInput){
-$(".bigCard").children().remove();
-$(".card1").children().remove();
-$(".card2").children().remove();
-$(".card3").children().remove();
-$(".card4").children().remove();
-$(".card5").children().remove();
+    $(".bigCard").children().remove();
+    $(".card1").children().remove();
+    $(".card2").children().remove();
+    $(".card3").children().remove();
+    $(".card4").children().remove();
+    $(".card5").children().remove();
 
- console.log(data,cityInput);
+    var classColor;
+    if (data.daily[0].uvi <= 2) {
+        classColor = "green";
+    } else if (data.daily[0].uvi <= 5) {
+        classColor = "yellow";
+    } else if (data.daily[0].uvi <= 7) {
+        classColor = "orange";
+    } else if (data.daily[0].uvi <= 10) {
+        classColor = "red";
+    } else {
+        classColor = "violet";
+    };
+
+
+
+console.log(data,cityInput);
+
 //  Big Card Data  
 $('<h5>' + cityInput + ' ('+ moment.unix(data.daily[0].dt).format("MM/DD/YYYY") +') <img src="' + "http://openweathermap.org/img/w/" + data.daily[0].weather[0].icon + ".png" +'"/></h5>').appendTo(".bigCard");
 $(".bigCard").children('h5').addClass("card-title");
-// $('<div><img src="' + "http://openweathermap.org/img/w/" + data.daily[0].weather[0].icon + ".png" +'"/></div>').appendTo(".bigCard");
 $('<p>Temp: ' + data.daily[0].temp.day +'/' + data.daily[0].temp.night+ ' °F</p>').appendTo(".bigCard");
 $('<p>Wind: ' + data.daily[0].wind_speed +' MPH</p>').appendTo(".bigCard");
 $('<p>Humidity: ' + data.daily[0].humidity +' %</p>').appendTo(".bigCard");
-$('<p>UV Index: ' + data.daily[0].uvi +'</p>').appendTo(".bigCard");
+$('<p>UV Index: <span class = "'+classColor+'">'+ data.daily[0].uvi +'</span></p>').appendTo(".bigCard");
 $(".bigCard").children('p').addClass("card-text");
+
+
 
 //  Card 1 Data  
 $('<h5>'+ moment.unix(data.daily[1].dt).format("MM/DD/YYYY") +'</h5>').appendTo(".card1");

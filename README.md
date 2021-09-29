@@ -40,6 +40,8 @@ The following image shows the web application's appearance and functionality:
 
 ## Grading Requirements
 
+My webpage: https://pgandhi21.github.io/Weather-Dashboard/
+
 This homework is graded based on the following criteria: 
 
 ### Technical Acceptance Criteria: 40%
