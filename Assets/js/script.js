@@ -20,7 +20,7 @@ $(".cityForm").children("button").click(function(event){
 
 
 function cityListEl(city) {
-    var latLonURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=3e666a3d81484f1bb070cec8466f5dd9";
+    var latLonURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=3e666a3d81484f1bb070cec8466f5dd9";
 
     fetch(latLonURL)
         .then(response =>response.json())
